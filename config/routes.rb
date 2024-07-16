@@ -3,4 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "auth#login"
+  
+  # get '/auth/google_oauth2', to: 'auth#google_oauth2_login'
+  get '/auth/google_oauth2/callback', to: 'auth#create'
 end
