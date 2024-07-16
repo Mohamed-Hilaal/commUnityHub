@@ -7,7 +7,8 @@ body {
 
 .login-container {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
+    // background-color: blue;
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
@@ -56,9 +57,23 @@ body {
     color: $primary-color;
   }
   
-  .btn {
+
+  
+  .google-signin-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; 
+  }
+  
+  .google-signin-form {
+    width: 50%;
+  }
+  
+  .google-signin-btn {
     font-family: sans-serif;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: $primary-background-color;
     color: $primary-color;
     padding: 10px 20px;
@@ -66,6 +81,12 @@ body {
     border: 1px solid $primary-border;
     border-radius: 8px;
     text-align: center;
-    width: 50%;
+    width: 100%;
     cursor: pointer;
+    font-size: 16px;
+    height: 40px;
+  }
+  
+  .google-signin-btn i {
+    margin-right: 10px;
   }
