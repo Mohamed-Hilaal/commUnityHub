@@ -1,9 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import './Login.css'
 import axios from 'axios';
 
-const SignInPage = () => {
+const Login = () => {
   const handleGoogleSignIn = async (event) => {
     event.preventDefault();
     try {
@@ -32,7 +32,7 @@ const SignInPage = () => {
         <div className="google-signin-container">
           <form onSubmit={handleGoogleSignIn} className="google-signin-form">
             <button type="submit" className="btn btn-primary google-signin-btn" id="signIn">
-              <FontAwesomeIcon icon={faGoogle} />
+              <FontAwesomeIcon icon="fa-brands fa-google" />
               Continue with Google
             </button>
           </form>
@@ -42,4 +42,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default Login;
