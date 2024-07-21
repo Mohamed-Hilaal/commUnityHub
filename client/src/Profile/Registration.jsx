@@ -4,7 +4,7 @@ const handleBtnClick = async () => {
 
     const res = await HttpClient.postData("auth/apiTesting")
     
-    console.log(res)
+    console.log(res, " : REs")
 
 }
 const Registration = () =>{
