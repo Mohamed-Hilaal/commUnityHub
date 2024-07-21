@@ -3,11 +3,29 @@ import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google'
 import HttpClient from '../Http/HttpClient'
 import { useNavigate } from 'react-router-dom';
 
-const CLIENT_ID = '857121110130-puk3i7e1pv77ri5jqsmrumkp12add22c.apps.googleusercontent.com';
 
 const GoogleOAuth = () => {
-
+    
+    const [clientID, setClientID] = React.useState('')
+  
     const navigate = useNavigate();
+
+    const getClientId = async () =>{
+
+      try{
+        
+        const data = await HttpClient.getData('auth/getClientID')
+        setClientID(data.clientID)
+
+      }catch(error){
+        console.error('Error fetching clientID :', error);
+      }
+
+    }
+
+    React.useEffect(() => {
+      getClientId()
+    }, [])
 
     const handleLoginSuccess = async (credentialResponse) => {
       
@@ -19,7 +37,7 @@ const GoogleOAuth = () => {
           }
         )
 
-        if( response.status == 200){
+        if( response.status == "success"){
           navigate('/profile_registration')
         }
 
@@ -33,7 +51,7 @@ const GoogleOAuth = () => {
 
   return (
 
-    <GoogleOAuthProvider clientId={CLIENT_ID}>
+    <GoogleOAuthProvider clientId={clientID}>
         <GoogleLogin
             onSuccess={handleLoginSuccess}
             onError={() => {

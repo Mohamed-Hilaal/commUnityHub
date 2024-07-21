@@ -19,7 +19,7 @@ class HttpClient {
   async getData(url, params = {}) {
     try {
       const response = await this.axiosInstance.get(url, { params });
-      return response
+      return response.data
     } catch (error) {
       console.error('Error appeared while trying to fetch data:', error);
       throw error;
@@ -29,7 +29,7 @@ class HttpClient {
   async postData(url, data = {}) {
     try {
       const response = await this.axiosInstance.post(url, data);
-      return response
+      return response.data
     } catch (error) {
       console.error('Error appeared while trying to submit data:', error);
       throw error;
