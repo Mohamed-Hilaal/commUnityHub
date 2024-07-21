@@ -5,35 +5,63 @@ class AuthController < ApplicationController
     end
 
     def google_oauth2_login
-        redirect_to '/auth/google_oauth2'  # Redirect to Google's OAuth2 authorization endpoint
+        redirect_to '/auth/google_oauth2'
     end
 
-    def create
+    def google_oauth2
+      token = params[:credential]
 
-        auth = request.env['omniauth.auth']
+      begin
+        payload = Google::Auth::IDTokens.verify_oidc(
+          token,
+          aud: ENV['GOOGLE_CLIENT_ID']
+        )
+
+        user = User.find_by(email: payload['email'])
         
-        begin
-          user = User.find_by(email: auth['info']['email'])
+
+        if !user
           
-          if !user
-            # User doesn't exist, create new account and user
-            account = Account.create(account_type: 'basic')  # Create an account
-            
-            user = User.create(
-              email: auth['info']['email'],
-              full_name: auth['info']['name'],
-              username: auth['info']['name'],
-              google_id: auth['info']['email'],
-              account: account 
-            )
-          end
-      
-        #   session[:user_id] = user.id  # Set the user session ID
-          redirect_to root_path, notice: 'Successfully logged in!'
-        rescue ActiveRecord::RecordInvalid => e
-          puts("Error occurred while logging in: #{e.message}")
-          redirect_to root_path, notice: 'Failed to log in!'
+          account = Account.create(account_type: 'basic')  # Create an account
+          
+          user = User.create(
+            email: payload['email'],
+            full_name: payload['name'],
+            username: payload['name'],
+            google_id: payload['email'],
+            account: account 
+          )
+          
         end
+
+        render json: { status: 'success' }
+      rescue Google::Auth::IDTokens::SignatureError
+        render json: { status: 'error', message: 'Invalid credentials' }, status: :unauthorized
+      rescue StandardError => e
+        render json: { status: 'error', message: e.message }, status: :internal_server_error
+      rescue ActiveRecord::RecordInvalid => e
+        redirect_to json: { status: 'error', message: e.message }, status: :error
+      end
+
+    end
+
+
+    def apiTesting
+
+      response_data = {
+        message: "Success",
+        data: {
+          id: 1,
+          name: "Sample"
+        }
+      }
+      
+      # Render the response as JSON
+      render json: response_data, status: :ok
+    end
+
+
+    def create
 
       end
       

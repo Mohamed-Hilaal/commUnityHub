@@ -1,18 +1,12 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import GoogleOAuth from './GoogleOAuth'
+import './Login.css'
 import axios from 'axios';
 
-const SignInPage = () => {
+const Login = () => {
   const handleGoogleSignIn = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post('/auth/google_oauth2', {}, { withCredentials: true });
-      window.location.href = response.request.responseURL;
-    } catch (error) {
-      console.error('Error signing in with Google:', error);
-    }
-  };
+};
 
   return (
     <div className="login-container">
@@ -30,16 +24,12 @@ const SignInPage = () => {
         </h2>
 
         <div className="google-signin-container">
-          <form onSubmit={handleGoogleSignIn} className="google-signin-form">
-            <button type="submit" className="btn btn-primary google-signin-btn" id="signIn">
-              <FontAwesomeIcon icon={faGoogle} />
-              Continue with Google
-            </button>
-          </form>
+
+            <GoogleOAuth/>
         </div>
       </div>
     </div>
   );
 };
 
-export default SignInPage;
+export default Login;

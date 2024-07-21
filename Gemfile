@@ -47,17 +47,14 @@ gem 'pg'
 gem "sassc-rails"
 
 gem 'font-awesome-sass', '~> 5.15'
-
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-rails_csrf_protection'
-
 gem 'jquery-rails'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'rack-cors'
+gem 'googleauth'
 
+gem 'pry'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
