@@ -8,6 +8,15 @@ class AuthController < ApplicationController
         redirect_to '/auth/google_oauth2'
     end
 
+    def client_id
+      
+      data = {
+        clientID: ENV['GOOGLE_CLIENT_ID']
+      }
+
+      render json: data, status: :ok
+    end
+
     def google_oauth2
       token = params[:credential]
 
