@@ -35,6 +35,17 @@ class HttpClient {
       throw error;
     }
   }
+
+  async updateData(url, data = {}) {
+    try {
+      const response = await this.axiosInstance.patch(url, {data});
+      console.log(response, ": Res")
+      return response.data
+    } catch (error) {
+      console.error('Error appeared while trying to submit data:', error);
+      throw error;
+    }
+  }
 }
 
 export default new HttpClient();
