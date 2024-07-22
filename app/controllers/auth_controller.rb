@@ -53,35 +53,4 @@ class AuthController < ApplicationController
       end
 
     end
-
-
-    def apiTesting
-
-      response_data = {
-        message: "Success",
-        data: {
-          id: 1,
-          name: "Sample"
-        }
-      }
-      
-      # Render the response as JSON
-      render json: response_data, status: :ok
-    end
-
-
-    def create
-
-      end
-      
-      def destroy
-        session[:user_id] = nil 
-        redirect_to root_path, notice: 'Successfully logged out!'
-      end
-      
-
-    def failure
-        redirect_to root_path, alert: 'Authentication failed, please try again.'
-    end
-
 end
