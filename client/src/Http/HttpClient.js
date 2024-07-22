@@ -27,8 +27,21 @@ class HttpClient {
   }
 
   async postData(url, data = {}) {
+
+    console.log(url)
+    // try {
+    //   const response = await this.axiosInstance.post(url, data);
+    //   return response.data
+    // } catch (error) {
+    //   console.error('Error appeared while trying to submit data:', error);
+    //   throw error;
+    // }
+  }
+
+  async updateData(url, data = {}) {
     try {
-      const response = await this.axiosInstance.post(url, data);
+      const response = await this.axiosInstance.patch(url, {data});
+      console.log(response, ": Res")
       return response.data
     } catch (error) {
       console.error('Error appeared while trying to submit data:', error);
