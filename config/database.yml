@@ -35,9 +35,9 @@ development:
   <<: *default
   database: commUnityHub_dev
 
-# test:
-#   <<: *default
-#   database: commUnityHub_test
+test:
+  <<: *default
+  database: commUnityHub_test
 
 # production:
 #   <<: *default
