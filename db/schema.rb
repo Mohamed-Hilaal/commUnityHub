@@ -10,12 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_13_063122) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_21_091710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string "account_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "unities", force: :cascade do |t|
+    t.string "community_name", null: false
+    t.string "location"
+    t.string "category", null: false
+    t.string "audience", null: false
+    t.text "community_description", null: false
+    t.string "contact_method", null: false
+    t.text "community_vision", null: false
+    t.text "goals", null: false
+    t.text "long_term_objectives", null: false
+    t.boolean "current_interest"
+    t.text "content_and_activities"
+    t.string "commitment_level", null: false
+    t.text "differentiation"
+    t.text "potential_challenges"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
