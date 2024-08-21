@@ -1,17 +1,21 @@
+import React, {useState} from 'react'
 import Unity from "./Unity"
-
+import CreateUnityModal from './CreateUnityModal';
 
 const Communities = () => {
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const handleCreateCommunity = () => {
-        
-        console.log('creating')
-
-    }
-
+      setIsModalOpen(true);
+    };
+  
+    const closeModal = () => {
+      setIsModalOpen(false);
+    };
 
     return (
-        <div className="w-2/5 p-4 bg-white border-l border-gray-200 dark:bg-black dark:border-gray-700 overflow-y-auto">
+        <div className="w-2/5 p-4 bg-white border-l border-gray-200 dark:bg-black dark:border-gray-700 ">
             
             <div className="community-header-container flex justify-between items-center mb-4">
 
@@ -45,8 +49,13 @@ const Communities = () => {
                 </li>
             </ul>
 
+
+            {isModalOpen && <CreateUnityModal closeModal={closeModal}/> }
+
         </div>
     )
 }
 
 export default Communities
+
+

@@ -1,8 +1,8 @@
-import SideBar from "./Sidebar"
-import Navbar from "./Navbar"
-import Communities from "./Communities"
+import SideBar from "./SideBar/Sidebar"
+import Navbar from "./Navbar/Navbar"
+import Communities from "./CommUnity/Communities"
 
-import Feed from './Feed'
+import Feed from './Feed/Feed'
 
 const Dashboard = () => {
     return (
