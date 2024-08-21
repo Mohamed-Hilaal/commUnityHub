@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   patch 'profile/register', to: 'profile#register'
 
+  post '/unity/create', to: 'unity#create'
+
 end
