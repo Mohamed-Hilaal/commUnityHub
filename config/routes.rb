@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   post '/unity/create', to: 'unity#create'
 
+  get '/unity/get_unities', to: 'unity#get_unities'
+
 end

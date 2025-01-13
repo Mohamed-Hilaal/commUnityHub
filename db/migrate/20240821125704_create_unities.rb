@@ -1,4 +1,4 @@
-class CreateUnity < ActiveRecord::Migration[7.0]
+class CreateUnities < ActiveRecord::Migration[7.0]
   def change
     create_table :unities do |t|
       t.string :community_name, null: false, unique: true
