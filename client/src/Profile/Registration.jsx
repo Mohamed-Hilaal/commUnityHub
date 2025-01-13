@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HttpClient from '../Http/HttpClient';
 import './registration.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
   
     
 const Registration = () => {
 
+    const location = useLocation();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        username: '',
-        email: '',
+        username: location.state?.payload?.username || '',
+        email: location.state?.payload?.email || '',
         contactNumber: '',
         accountType: 'Basic',
         terms: false
@@ -40,6 +41,12 @@ const Registration = () => {
         }
         
     };
+
+    useEffect(() => {
+        if (!location.state?.payload.email){
+            navigate('/')
+        }
+    })
 
     return (
         <div className='registration-container'>
@@ -75,7 +82,8 @@ const Registration = () => {
                         placeholder="name@example.com"
                         value={formData.email}
                         onChange={handleChange}
-                        required
+                        readOnly
+                        disabled
                     />
                 </div>
 

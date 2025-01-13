@@ -5,11 +5,12 @@ import Dashboard from './Dashboard'
 import './App.css'
 
 function App() {
+  const payload = {}
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="" element={<Login />}/>
+          <Route path="" element={<Login payload={payload}/>}/>
           <Route path="/profile_registration" element={<Registration />}/>
           <Route path="/dashboard" element={<Dashboard />}/>
         </Routes>
