@@ -31,19 +31,23 @@ class AuthController < ApplicationController
 
         if !user
           
-          account = Account.create(account_type: 'basic')  # Create an account
+          puts "User record not found, creating new user"
+          # account = Account.create(account_type: 'basic')  # Create an account
           
-          user = User.create(
-            email: payload['email'],
-            full_name: payload['name'],
-            username: payload['name'],
-            google_id: payload['email'],
-            account: account 
-          )
-          
+          # user = User.create(
+          #   email: payload['email'],
+          #   full_name: payload['name'],
+          #   username: payload['name'],
+          #   google_id: payload['email'],
+          #   account: account 
+          # )
+
+          render json: { status: 'success', payload: {email: payload['email'], username: payload['name']}, userExists: false }, status: :ok
+        else 
+          render json: { status: 'success', payload: {}, userExists: true }, status: :ok
+          puts "User record found"
         end
 
-        render json: { status: 'success' }
       rescue Google::Auth::IDTokens::SignatureError
         render json: { status: 'error', message: 'Invalid credentials' }, status: :unauthorized
       rescue StandardError => e

@@ -37,8 +37,10 @@ const GoogleOAuth = () => {
           }
         )
 
-        if( response.status == "success"){
-          navigate('/profile_registration')
+        if( response.status == "success" && !response.userExists){
+          navigate('/profile_registration', {state: {payload: response.payload}})
+        }else if(response.status == "success" && response.userExists){
+          navigate('/dashboard')
         }
 
         console.log('Server response:', response);

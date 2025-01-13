@@ -6,7 +6,7 @@ import axios from 'axios';
 const Login = () => {
   const handleGoogleSignIn = async (event) => {
     event.preventDefault();
-};
+  };
 
   return (
     <div className="login-container">
