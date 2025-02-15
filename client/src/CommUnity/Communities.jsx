@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Unity from "./Unity"
 import CreateUnityModal from './CreateUnityModal';
+import HttpClient from '../Http/HttpClient';
 
 const Communities = () => {
 
@@ -13,6 +14,17 @@ const Communities = () => {
     const closeModal = () => {
       setIsModalOpen(false);
     };
+
+    const [unities, setUnities] = useState([])
+
+    const getUnities = async () => {
+        const response = await HttpClient.getData('unity/get_unities')
+        setUnities(response.unities)
+    }
+
+    useEffect(()=>{
+        getUnities()
+    }, [isModalOpen])
 
     return (
         <div className="w-2/5 p-4 bg-white border-l border-gray-200 dark:bg-black dark:border-gray-700 ">
@@ -38,15 +50,13 @@ const Communities = () => {
             </div>
             
             <ul className="max-w divide-y divide-gray-200 dark:divide-gray-700">
-                <li className="py-3 sm:py-4">
-                    <Unity/>
-                </li>
-                <li className="py-3 sm:py-4">
-                    <Unity/>
-                </li>
-                <li className="py-3 sm:py-4">
-                    <Unity/>
-                </li>
+                {
+                    unities.map( (unity) => {
+                        return (<li className="py-3 sm:py-4">
+                            <Unity unityDetails={unity}/>
+                        </li>)
+                    })
+                }
             </ul>
 
 
