@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   get '/unity/get_unities', to: 'unity#get_unities'
 
+  get '/post/get_unity_posts', to: 'post#get_unity_posts'
+
 end
