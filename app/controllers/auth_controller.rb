@@ -28,7 +28,8 @@ class AuthController < ApplicationController
 
         user = User.find_by(email: payload['email'])
         
-
+        session[:user_id] = user.id
+        
         if !user
           
           puts "User record not found, creating new user"

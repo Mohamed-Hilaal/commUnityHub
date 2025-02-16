@@ -1,7 +1,8 @@
 class PostController < ApplicationController
     def get_unity_posts
         begin 
-            puts "Reched..."
+
+            puts "Current User : #{@current_user}"
             posts = Post.all
             unity_posts = posts.map do |post|
                 post.as_json.merge({
