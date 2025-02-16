@@ -18,7 +18,7 @@ class HttpClient {
 
   async getData(url, params = {}) {
     try {
-      const response = await this.axiosInstance.get(url, { params });
+      const response = await this.axiosInstance.get(url, { params }, { withCredentials: true });
       return response.data
     } catch (error) {
       console.error('Error appeared while trying to fetch data:', error);
@@ -28,7 +28,7 @@ class HttpClient {
 
   async postData(url, data = {}) {
     try {
-      const response = await this.axiosInstance.post(url, data);
+      const response = await this.axiosInstance.post(url, data, { withCredentials: true });
       return response.data
     } catch (error) {
       console.error('Error appeared while trying to submit data:', error);
@@ -38,7 +38,7 @@ class HttpClient {
 
   async updateData(url, data = {}) {
     try {
-      const response = await this.axiosInstance.patch(url, {data});
+      const response = await this.axiosInstance.patch(url, {data}, { withCredentials: true });
       console.log(response, ": Res")
       return response.data
     } catch (error) {
