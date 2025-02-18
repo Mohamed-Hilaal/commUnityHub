@@ -27,9 +27,6 @@ class AuthController < ApplicationController
         )
 
         user = User.find_by(email: payload['email'])
-        
-        session[:user_id] = user.id
-        
         if !user
           
           puts "User record not found, creating new user"
@@ -45,8 +42,8 @@ class AuthController < ApplicationController
 
           render json: { status: 'success', payload: {email: payload['email'], username: payload['name']}, userExists: false }, status: :ok
         else 
+          session[:user_id] = user.id
           render json: { status: 'success', payload: {}, userExists: true }, status: :ok
-          puts "User record found"
         end
 
       rescue Google::Auth::IDTokens::SignatureError

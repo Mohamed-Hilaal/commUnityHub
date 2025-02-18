@@ -24,7 +24,7 @@ class ProfileController < ApplicationController
             
             puts "user record found"
           end
-
+          session[:user_id] = user.id
           render json: { status: 'success' }, status: :ok
     
         rescue ActiveRecord::RecordInvalid => e
