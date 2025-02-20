@@ -5,7 +5,6 @@ import Dashboard from './Dashboard'
 import './App.css'
 
 function App() {
-  const payload = {}
   return (
     <div className="App">
       <BrowserRouter>
