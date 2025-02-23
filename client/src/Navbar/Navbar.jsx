@@ -1,5 +1,5 @@
 import { TiGroupOutline } from 'react-icons/ti';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { UserContext } from "../UserContext"
 const Navbar = () => {
 
@@ -9,6 +9,20 @@ const Navbar = () => {
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
     };
+    const dropdownRef = useRef(null);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false)
+                setProfileDropdown(false)
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [dropdownRef]);
 
     const [profileDropdown, setProfileDropdown] = useState(false);
 
@@ -44,7 +58,7 @@ const Navbar = () => {
                             </button>
 
                             {dropdownOpen && (
-                                <div id="unityDropdown" className="absolute right-2 mt-2  bg-white divide-y divide-gray-100 rounded-lg w-70 dark:bg-gray-700 dark:divide-gray-600">
+                                <div ref={dropdownRef} id="unityDropdown" className="absolute right-2 mt-2  bg-white divide-y divide-gray-100 rounded-lg w-70 dark:bg-gray-700 dark:divide-gray-600">
                                     <div className="px-4 py-3 text-sm dark:text-blue-200">
 
                                     {currentUserDetails.current_user_id && currentUserDetails.current_unity_id && currentUserDetails.current_unity_name != "" ? (
@@ -59,6 +73,16 @@ const Navbar = () => {
                                         </>
                                     )}
                                     </div>
+
+                                    <ul className="py-1" role="none">
+                                        <li>
+                                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
+                                        </li>
+                                    </ul>
+                                                
                                     <div className="">
                                         <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg dark:text-green-200 dark:hover:text-white">Switch Unity</a>
                                     </div>
@@ -75,13 +99,13 @@ const Navbar = () => {
                                 
                                     { profileDropdown && (
 
-                                        <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+                                        <div ref={dropdownRef} className="absolute right-2 mt-2  bg-white divide-y divide-gray-100 rounded-lg w-70 dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                                             <div className="px-4 py-3" role="none">
                                                 <p className="text-sm text-gray-900 dark:text-white" role="none">
-                                                Neil Sims
+                                                    {currentUserDetails.current_user_name}
                                                 </p>
                                                 <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                                neil.sims@flowbite.com
+                                                    {currentUserDetails.current_user_email}
                                                 </p>
                                             </div>
                                                 <ul className="py-1" role="none">
@@ -94,10 +118,10 @@ const Navbar = () => {
                                                     <li>
                                                     <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
                                                     </li>
-                                                    <li>
-                                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
-                                                    </li>
                                                 </ul>
+                                            <div className="">
+                                                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg dark:text-red-400 dark:hover:text-white">Sign Out</a>
+                                            </div>
                                         </div>
                                     )
                                     }
