@@ -17,6 +17,20 @@ class AuthController < ApplicationController
       render json: data, status: :ok
     end
 
+    def get_current_user_details
+      begin
+        user = User.find_by(id: @current_user.id)
+        if user
+          payload = {current_user_id:  user.id ,current_user_name: user.username, current_unity_name: user.current_unity.community_name, current_unity_id: user.current_unity_id}
+          render json: { status: 'success', payload: payload}, status: :ok
+        else 
+          render json: { status: 'failure', message: "Current user not found"}, status: :unauthorized
+        end
+      rescue StandardError => e
+        render json: { status: 'error', message: e.message }, status: :internal_server_error
+      end
+    end
+
     def google_oauth2
       token = params[:credential]
 
@@ -27,9 +41,6 @@ class AuthController < ApplicationController
         )
 
         user = User.find_by(email: payload['email'])
-        
-        session[:user_id] = user.id
-        
         if !user
           
           puts "User record not found, creating new user"
@@ -45,8 +56,9 @@ class AuthController < ApplicationController
 
           render json: { status: 'success', payload: {email: payload['email'], username: payload['name']}, userExists: false }, status: :ok
         else 
-          render json: { status: 'success', payload: {}, userExists: true }, status: :ok
-          puts "User record found"
+          session[:user_id] = user.id
+          payload = {current_user_id:  user.id ,current_user_name: user.username, current_unity_name: user.current_unity.community_name, current_unity_id: user.current_unity_id}
+          render json: { status: 'success', payload: payload, userExists: true}, status: :ok
         end
 
       rescue Google::Auth::IDTokens::SignatureError

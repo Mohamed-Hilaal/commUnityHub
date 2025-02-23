@@ -16,6 +16,12 @@ class UnityController < ApplicationController
         )
 
         if unity.save
+          if @current_user.current_unity_id.nil?
+            @current_user.current_unity = unity
+          end
+
+          @current_user.save!
+
           render json: { status: "success", message: "Unity is successfully created" }, status: :ok
         else
           render json: { status: "failure", errors: unity.errors.full_messages }, status: :unprocessable_entity

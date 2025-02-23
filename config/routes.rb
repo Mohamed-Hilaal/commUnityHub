@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   post '/auth/google_oauth2', to: 'auth#google_oauth2'
 
+  get '/auth/get_current_user_details', to: 'auth#get_current_user_details'
+
   get 'auth/getClientID', to: 'auth#client_id'
 
   patch 'profile/register', to: 'profile#register'
