@@ -21,7 +21,7 @@ const CreatePostModal = ({closeModal, setUnityPosts}) => {
 
         if (content === "") return
 
-        const res = await HttpClient.postData('post/create_unity_post', 
+        const res = await HttpClient.postData('post/create_post', 
           {content: content, title: ""}
         )
         

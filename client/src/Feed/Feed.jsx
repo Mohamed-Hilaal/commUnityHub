@@ -15,9 +15,9 @@ const Feed = () => {
     };
 
     const getUnityPosts = async () => {
-        const response = await HttpClient.getData('post/get_unity_posts')
+        const response = await HttpClient.getData('post/get_posts')
         console.log(response)
-        setUnityPosts(response.unity_posts)
+        setUnityPosts(response.posts)
     }
 
     const handleCreatePost = () => {
