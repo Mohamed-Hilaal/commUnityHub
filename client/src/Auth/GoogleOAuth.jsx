@@ -1,56 +1,8 @@
 import React from 'react';
 import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google'
-import HttpClient from '../Http/HttpClient'
-import { useNavigate } from 'react-router-dom';
 
-
-const GoogleOAuth = () => {
-    
-    const [clientID, setClientID] = React.useState('')
-  
-    const navigate = useNavigate();
-
-    const getClientId = async () =>{
-
-      try{
-        
-        const data = await HttpClient.getData('auth/getClientID')
-        setClientID(data.clientID)
-
-      }catch(error){
-        console.error('Error fetching clientID :', error);
-      }
-
-    }
-
-    React.useEffect(() => {
-      getClientId()
-    }, [])
-
-    const handleLoginSuccess = async (credentialResponse) => {
-      
-      try{
-        const response = await HttpClient.postData(
-          'auth/google_oauth2',
-          {
-            credential: credentialResponse.credential
-          }
-        )
-
-        if( response.status == "success" && !response.userExists){
-          navigate('/profile_registration', {state: {payload: response.payload}})
-        }else if(response.status == "success" && response.userExists){
-          navigate('/dashboard')
-        }
-
-        console.log('Server response:', response);
-      }
-      catch(error){
-        console.error('Error sending credential to server:', error);
-      }
-
-    }
-
+const GoogleOAuth = ({clientID, handleLoginSuccess}) => {
+       
   return (
 
     <GoogleOAuthProvider clientId={clientID}>

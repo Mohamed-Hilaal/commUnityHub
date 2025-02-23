@@ -30,7 +30,7 @@ const Registration = () => {
         
         try{
             const res = await HttpClient.updateData('profile/register', formData)
-            // console
+
             if  (!res || res.status !== 'success'){
                 throw 'something went wrong'
             }

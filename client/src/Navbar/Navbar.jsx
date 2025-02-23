@@ -1,9 +1,10 @@
 import { TiGroupOutline } from 'react-icons/ti';
-import { useState } from 'react';
-
-const Navbar = ({unity}) => {
+import { useState, useContext } from 'react';
+import { UserContext } from "../UserContext"
+const Navbar = () => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const { currentUserDetails } = useContext(UserContext);
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
@@ -46,10 +47,10 @@ const Navbar = ({unity}) => {
                                 <div id="unityDropdown" className="absolute right-2 mt-2  bg-white divide-y divide-gray-100 rounded-lg w-70 dark:bg-gray-700 dark:divide-gray-600">
                                     <div className="px-4 py-3 text-sm dark:text-blue-200">
 
-                                    {unity && unity.length > 0 ? (
+                                    {currentUserDetails.current_user_id && currentUserDetails.current_unity_id && currentUserDetails.current_unity_name != "" ? (
                                         <>
                                             <div>You're currently representing </div>
-                                            <div className="font-large truncate">name@flowbite.com</div>
+                                            <div className="font-large truncate">{currentUserDetails.current_unity_name}</div>
                                         </>
                                     ) : (
                                         <>
