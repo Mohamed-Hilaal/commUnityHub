@@ -17,4 +17,7 @@ Rails.application.routes.draw do
 
   get '/post/get_unity_posts', to: 'post#get_unity_posts'
 
+  post '/post/create_unity_post', to: 'post#create_unity_post'
+
+
 end

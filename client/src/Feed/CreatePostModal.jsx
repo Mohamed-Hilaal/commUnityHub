@@ -1,5 +1,6 @@
 import CreatePostForm from "./CreatePostForm"
 import { useState } from "react";
+import HttpClient from '../Http/HttpClient'
 
 const CreatePostModal = ({closeModal, setUnityPosts}) => {
 
@@ -15,11 +16,17 @@ const CreatePostModal = ({closeModal, setUnityPosts}) => {
 
     }
 
-    const handlPostCreation = (e) => {
+    const handlPostCreation = async (e) => {
         e.preventDefault()
 
         if (content === "") return
 
+        const res = await HttpClient.postData('post/create_unity_post', 
+          {content: content, title: ""}
+        )
+        
+        if (res.status !== "success") return
+        
         setUnityPosts((prev) => ( 
             [...prev, {content: content, posted_by: "You"}]
          ))
