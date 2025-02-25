@@ -1,8 +1,8 @@
-import CreatePostForm from "./CreatePostForm"
+import CreateUnityPostForm from "./CreateUnityPostForm"
 import { useState } from "react";
-import HttpClient from '../Http/HttpClient'
+import HttpClient from '../../Http/HttpClient'
 
-const CreatePostModal = ({closeModal, setPosts}) => {
+const CreateUnityPostModal = ({closeModal, setUnityPosts}) => {
 
 
     const [content, setContent] = useState("")
@@ -27,7 +27,7 @@ const CreatePostModal = ({closeModal, setPosts}) => {
         
         if (res.status !== "success") return
         
-        setPosts((prev) => ( 
+        setUnityPosts((prev) => ( 
             [...prev, {content: content, posted_by: "You"}]
          ))
         console.log("setted")
@@ -54,7 +54,7 @@ const CreatePostModal = ({closeModal, setPosts}) => {
               </button>
             </div>
             <div className="flex-grow overflow-y-auto">
-                <CreatePostForm handlPostCreation = {handlPostCreation} content={content} handleContentChange={handleContentChange}/>
+                <CreateUnityPostForm handlPostCreation = {handlPostCreation} content={content} handleContentChange={handleContentChange}/>
             </div>
           </div>
         </div>
@@ -62,4 +62,4 @@ const CreatePostModal = ({closeModal, setPosts}) => {
     )
 }
 
-export default CreatePostModal
+export default CreateUnityPostModal

@@ -1,6 +1,6 @@
 
 
-const Post = ({post}) => {
+const UnityPost = ({unityPost}) => {
     return (
         <>
              {/* <!-- Post --> */}
@@ -11,13 +11,13 @@ const Post = ({post}) => {
         
                     {/* <!-- User Name and Time --> */}
                     <div className="ml-3">
-                        <h3 className="text-lg font-semibold dark:text-white">{post.posted_by}</h3>
+                        <h3 className="text-lg font-semibold dark:text-white">{unityPost.posted_by}</h3>
                         <span className="text-sm text-gray-500 dark:text-gray-400">2 hours ago</span>
                     </div>
                 </div>
                 {/* <!-- Post Content --> */}
                 <p className="text-gray-600 dark:text-gray-300">
-                    {post.content}
+                    {unityPost.content}
                 </p>
                 {/* <!-- Post Image (Optional) --> */}
 
@@ -47,4 +47,4 @@ const Post = ({post}) => {
     )
 }
 
-export default Post
+export default UnityPost

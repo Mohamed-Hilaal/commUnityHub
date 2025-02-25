@@ -1,22 +1,23 @@
-import Post from './Post'
-import './Post.css'
+import UnityPost from './UnityPost'
+import './UnityPost.css'
 import { useEffect, useState } from 'react'
-import HttpClient from '../Http/HttpClient'
-import CreatePostModal from './CreatePostModal';
+import HttpClient from '../../Http/HttpClient'
+import CreateUnityPostModal from './CreateUnityPostModal';
 // import Image from '../Images/Luffy.jpg'
 
-const Feed = () => {
+const UnityFeed = () => {
 
-    const [posts, setPosts] = useState([])
+    const [unityPosts, setUnityPosts] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     
     const closeModal = () => {
         setIsModalOpen(false);
     };
 
-    const getposts = async () => {
+    const getUnityPosts = async () => {
         const response = await HttpClient.getData('post/get_posts')
-        setPosts(response.posts)
+        console.log(response)
+        setUnityPosts(response.posts)
     }
 
     const handleCreatePost = () => {
@@ -24,7 +25,7 @@ const Feed = () => {
     }
 
     useEffect(()=>{
-        getposts()
+        getUnityPosts()
     }, [])
     
    return ( 
@@ -40,10 +41,10 @@ const Feed = () => {
             </div>
             <div className="space-y-4">
             {
-                posts.map(
-                    (post) => {
+                unityPosts.map(
+                    (unityPost) => {
                         return (
-                            <Post post={post}/>
+                            <UnityPost unityPost={unityPost}/>
                         )
                     }
                 )
@@ -51,7 +52,7 @@ const Feed = () => {
             }
             </div>
         </div>
-        {isModalOpen && <CreatePostModal closeModal={closeModal} setPosts={setPosts}/> }
+        {isModalOpen && <CreateUnityPostModal closeModal={closeModal} setUnityPosts={setUnityPosts}/> }
     </div>
 
 
@@ -59,4 +60,4 @@ const Feed = () => {
 }
 
 
-export default Feed
+export default UnityFeed
