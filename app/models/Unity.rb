@@ -1,5 +1,5 @@
 class Unity < ApplicationRecord
-
+    has_many :unity_posts
     has_and_belongs_to_many :users
     has_many :posts
 
