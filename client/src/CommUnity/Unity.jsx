@@ -1,4 +1,14 @@
+
+import HttpClient from "../Http/HttpClient"
+
 const Unity = ({unityDetails}) => {
+
+    const handleJoinUnity = async () => {
+        const response = await HttpClient.postData('/unity/join', {unity_id: unityDetails.id})
+        if (response.status === "success") {  
+            console.log("Joined Unity")
+        }
+    }
 
     return (
 
@@ -15,10 +25,9 @@ const Unity = ({unityDetails}) => {
                 {unityDetails.category}
                 </p>
             </div>
-            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            <button onClick={handleJoinUnity} className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                 Join
-                {/* $2367 */}
-            </div>
+            </button>
         </div>
     )
 

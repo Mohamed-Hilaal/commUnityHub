@@ -47,6 +47,20 @@ class UnityController < ApplicationController
         render json: { status: "failure", error: "An unexpected error occurred: #{e.message}" }, status: :internal_server_error
       end
     end
+
+    def join
+      
+      begin
+        unity = Unity.find(params[:unity_id])
+
+        if unity.users.include?(@current_user)
+          render json: { status: "failure", error: "You are already a member of this unity" }, status: :unprocessable_entity
+        else
+          unity.users << @current_user
+          render json: { status: "success", message: "You have successfully joined the unity" }, status: :ok
+        end
+      end
+    end
     
   end
   
