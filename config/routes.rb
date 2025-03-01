@@ -19,5 +19,12 @@ Rails.application.routes.draw do
 
   post '/post/create_post', to: 'post#create_post'
 
+  get '/unityPost/get_unity_posts/:unity_id', to: 'unity_post#get_unity_posts'
+
+  post '/unityPost/create', to: 'unity_post#create'
+
+  post '/unity/join', to: 'unity#join'
+
+
 
 end

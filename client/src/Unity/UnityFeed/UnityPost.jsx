@@ -1,6 +1,7 @@
 
 
 const UnityPost = ({unityPost}) => {
+    console.log("Unity Post : ", unityPost)
     return (
         <>
              {/* <!-- Post --> */}

@@ -5,7 +5,7 @@ import HttpClient from '../../Http/HttpClient'
 import CreateUnityPostModal from './CreateUnityPostModal';
 // import Image from '../Images/Luffy.jpg'
 
-const UnityFeed = () => {
+const UnityFeed = ({unity_id, unity_name}) => {
 
     const [unityPosts, setUnityPosts] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -15,9 +15,11 @@ const UnityFeed = () => {
     };
 
     const getUnityPosts = async () => {
-        const response = await HttpClient.getData('post/get_posts')
-        console.log(response)
-        setUnityPosts(response.posts)
+        const response = await HttpClient.getData(`unityPost/get_unity_posts/${unity_id}`);
+
+        if (!response.unity_posts) return 
+        
+        setUnityPosts(response.unity_posts)
     }
 
     const handleCreatePost = () => {
@@ -52,7 +54,7 @@ const UnityFeed = () => {
             }
             </div>
         </div>
-        {isModalOpen && <CreateUnityPostModal closeModal={closeModal} setUnityPosts={setUnityPosts}/> }
+        {isModalOpen && <CreateUnityPostModal closeModal={closeModal} setUnityPosts={setUnityPosts} unity_id={unity_id}/> }
     </div>
 
 

@@ -2,7 +2,7 @@ import CreateUnityPostForm from "./CreateUnityPostForm"
 import { useState } from "react";
 import HttpClient from '../../Http/HttpClient'
 
-const CreateUnityPostModal = ({closeModal, setUnityPosts}) => {
+const CreateUnityPostModal = ({closeModal, setUnityPosts, unity_id}) => {
 
 
     const [content, setContent] = useState("")
@@ -21,8 +21,8 @@ const CreateUnityPostModal = ({closeModal, setUnityPosts}) => {
 
         if (content === "") return
 
-        const res = await HttpClient.postData('post/create_post', 
-          {content: content, title: ""}
+        const res = await HttpClient.postData('/unityPost/create', 
+          {content: content, unity_id: unity_id}
         )
         
         if (res.status !== "success") return

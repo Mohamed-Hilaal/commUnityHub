@@ -1,11 +1,12 @@
 import { TiGroupOutline } from 'react-icons/ti';
 import { useState, useContext, useEffect, useRef } from 'react';
 import { UserContext } from "../UserContext"
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const { currentUserDetails } = useContext(UserContext);
-
+    const navigate = useNavigate();
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
     };
@@ -30,6 +31,9 @@ const Navbar = () => {
         setProfileDropdown(!profileDropdown);
     };
 
+    const navigateToUnityBoard = () => {   
+        navigate("/unityBoard", {state: {unity_id: currentUserDetails.current_unity_id, unity_name: currentUserDetails.current_unity_name}})
+    }
 
     return (
 
@@ -75,8 +79,8 @@ const Navbar = () => {
                                     </div>
 
                                     <ul className="py-1" role="none">
-                                        <li>
-                                            <a href="/unityBoard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Home</a>
+                                        <li onClick={navigateToUnityBoard}>
+                                            <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Home</a>
                                         </li>
                                         <li>
                                             <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
