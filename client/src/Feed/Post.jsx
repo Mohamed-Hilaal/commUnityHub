@@ -7,7 +7,9 @@ const Post = ({post}) => {
              <div className="bg-white dark:bg-black p-4 rounded-lg shadow">
                 <div className="flex items-center mb-4">
                     {/* <!-- User Image --> */}
-                     <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo"/>
+                    <div className="w-10 h-10 bg-gray-500 text-white rounded-full flex items-center justify-center font-semibold text-lg shadow-md">
+                        {post.posted_by.charAt(0).toUpperCase()}
+                    </div>
         
                     {/* <!-- User Name and Time --> */}
                     <div className="ml-3">
