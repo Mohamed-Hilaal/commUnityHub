@@ -61,6 +61,21 @@ class UnityController < ApplicationController
         end
       end
     end
+
+    def get_unity_members
+      
+      begin
+        
+        unity = Unity.find(params[:unity_id])
+
+        render json: { status: "success", members: unity.users }, status: :ok
+
+      rescue ActiveRecord::RecordNotFound => e
+
+        render json: { status: "failure", error: "Unity not found" }, status: :not_found
+
+      end
+    end
     
   end
   
