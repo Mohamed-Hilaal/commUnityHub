@@ -27,6 +27,10 @@ Rails.application.routes.draw do
 
   post '/unity/join', to: 'unity#join'
 
+  post '/unity_chat/create', to: 'unity_chat#create'
+
+  get '/unity_chat/get', to: 'unity_chat#get'
+
 
 
 end
