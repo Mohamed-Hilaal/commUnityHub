@@ -9,8 +9,8 @@ const Inbox = ({ unity_id, unity_name, handleChatNavigation }) => {
 
   useEffect(() => {
     const getInterLinks = async () => {
-      const response = await HttpClient.getData(`unity/get_unity_members/${unity_id}`);
-      setInterLinks(response.members);
+      const response = await HttpClient.getData(`unity_chat/get`);
+      setInterLinks(response.recipients);
     }
     getInterLinks()
   }, []);
@@ -29,9 +29,9 @@ const Inbox = ({ unity_id, unity_name, handleChatNavigation }) => {
       <ul className="flex-1 overflow-y-auto divide-y divide-gray-300 dark:divide-gray-700">
         {interLinks.map((member) => (
           <li
-            key={member.id}
+            key={member.recipient_id}
             className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition-all"
-            onClick={() => handleChatNavigation(member.id, member.username)}
+            onClick={() => handleChatNavigation(member.recipient_id, member.recipient_name)}
           >
             <Member member={member} />
           </li>

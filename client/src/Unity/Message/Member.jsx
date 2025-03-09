@@ -3,12 +3,12 @@ const Member = ({ member }) => {
       <div className="flex items-center space-x-4">
         {/* Avatar */}
         <div className="w-10 h-10 bg-gray-500 text-white rounded-full flex items-center justify-center font-semibold text-lg shadow-md">
-          {member.username.charAt(0).toUpperCase()}
+          {member.recipient_name.charAt(0).toUpperCase()}
         </div>
   
         {/* Member Details */}
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 dark:text-white">{member.username}</p>
+          <p className="text-sm font-medium text-gray-900 dark:text-white">{member.recipient_name}</p>
           <p className="text-xs text-gray-500 dark:text-gray-400">Last message preview...</p>
         </div>
   

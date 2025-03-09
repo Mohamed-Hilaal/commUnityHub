@@ -1,12 +1,12 @@
 
 import Navbar from "../Navbar/Navbar"
 import SideBar from "../SideBar/Sidebar"
-import Communities from "../CommUnity/Communities"
 import Inbox from "./Message/Inbox"
 import ChatBox from "./Message/ChatBox"
 import UnityFeed from './UnityFeed/UnityFeed'
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import { useState } from "react"
+import HttpClient from "../Http/HttpClient"
 
 const UnityBoard = () => {
 
@@ -20,16 +20,19 @@ const UnityBoard = () => {
     if (unity_id === null || unity_name === null) {
         navigate('/dashboard')
     }
-    const handleChatNavigation =(id, name)=>{
+    const handleChatNavigation = async(id, name)=>{
         setMemberId(id)
         setMemberName(name)
         setShowChatBox(true)
+
+        // const res = await HttpClient.postData('unity_chat/create')
+        // console.log(res)
     }
 
     return (
         <div className="flex h-screen pt-14">
 
-            <Navbar/>   
+            <Navbar/> 
             <SideBar/>
 
             <div className="flex flex-grow ml-64"> 
