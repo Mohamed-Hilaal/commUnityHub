@@ -1,7 +1,6 @@
 class UnityController < ApplicationController
 
     def create
-
       begin
         unity = Unity.new(
           community_name: params[:community_name],
@@ -12,9 +11,11 @@ class UnityController < ApplicationController
           goals: params[:goals],
           category: params[:category],
           audience: params[:audience],
-          long_term_objectives: params[:long_term_objectives]
-        )
-
+          long_term_objectives: params[:long_term_objectives],
+          )
+        
+        unity.creator = @current_user
+        
         if unity.save
           if @current_user.current_unity_id.nil?
             @current_user.current_unity = unity

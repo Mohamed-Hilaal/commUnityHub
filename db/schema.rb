@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_08_065202) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_22_091347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_08_065202) do
     t.text "potential_challenges"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "creator_id", null: false
+    t.index ["creator_id"], name: "index_unities_on_creator_id"
   end
 
   create_table "unities_users", id: false, force: :cascade do |t|
@@ -111,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_08_065202) do
   end
 
   add_foreign_key "posts", "unities"
+  add_foreign_key "unities", "users", column: "creator_id"
   add_foreign_key "unity_chat_memberships", "unity_chats"
   add_foreign_key "unity_chat_memberships", "users"
   add_foreign_key "unity_posts", "unities"
