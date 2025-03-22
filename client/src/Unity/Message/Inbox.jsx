@@ -31,7 +31,7 @@ const Inbox = ({ unity_id, unity_name, handleChatNavigation }) => {
           <li
             key={member.recipient_id}
             className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition-all"
-            onClick={() => handleChatNavigation(member.recipient_id, member.recipient_name)}
+            onClick={() => handleChatNavigation(member.recipient_id, member.recipient_name, member.chat_id)}
           >
             <Member member={member} />
           </li>

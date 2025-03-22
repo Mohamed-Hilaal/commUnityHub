@@ -32,7 +32,7 @@ const Navbar = () => {
     };
 
     const navigateToUnityBoard = () => {   
-        navigate("/unityBoard", {state: {unity_id: currentUserDetails.current_unity_id, unity_name: currentUserDetails.current_unity_name}})
+        navigate("/unityBoard", {state: {unity_id: currentUserDetails.current_unity_id, unity_name: currentUserDetails.current_unity_name, user_id: currentUserDetails.current_user_id}})
     }
 
     return (

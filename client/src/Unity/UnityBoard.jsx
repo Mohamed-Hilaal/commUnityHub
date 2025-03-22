@@ -15,15 +15,17 @@ const UnityBoard = () => {
     const [showChatBox, setShowChatBox] = useState(false)
     const [memberId, setMemberId] = useState(null)
     const [memberName, setMemberName] = useState('')
-    const {unity_id, unity_name} = location.state || {unity_id: null, unity_name: null}
+    const [chatId, setChatId] = useState('')
+    const {unity_id, unity_name, user_id} = location.state || {unity_id: null, unity_name: null, user_id: null}
 
-    if (unity_id === null || unity_name === null) {
+    if (unity_id === null || unity_name === null || user_id === null) {
         navigate('/dashboard')
     }
-    const handleChatNavigation = async(id, name)=>{
+    const handleChatNavigation = async(id, name, chat_id)=>{
         setMemberId(id)
         setMemberName(name)
         setShowChatBox(true)
+        setChatId(chat_id)
 
         // const res = await HttpClient.postData('unity_chat/create')
         // console.log(res)
@@ -38,7 +40,7 @@ const UnityBoard = () => {
             <div className="flex flex-grow ml-64"> 
                 <Inbox unity_id={unity_id} unity_name={unity_name} handleChatNavigation={handleChatNavigation}/>
                 {showChatBox ? (
-                    <ChatBox id={memberId} name={memberName}/>
+                    <ChatBox recipient_id={memberId} recipient_name={memberName} chatId={chatId} current_user_id={user_id}/>
                 ) :
                     <UnityFeed unity_id={unity_id} unity_name={unity_name}/>
                 }
