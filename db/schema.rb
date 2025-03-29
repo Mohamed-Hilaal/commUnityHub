@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_22_091347) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_23_144230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -113,7 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_22_091347) do
   end
 
   add_foreign_key "posts", "unities"
-  add_foreign_key "unities", "users", column: "creator_id"
+  add_foreign_key "unities", "users", column: "creator_id", on_delete: :nullify
   add_foreign_key "unity_chat_memberships", "unity_chats"
   add_foreign_key "unity_chat_memberships", "users"
   add_foreign_key "unity_posts", "unities"
