@@ -16,7 +16,7 @@ const Inbox = ({ unity_id, unity_name, handleChatNavigation }) => {
   }, []);
 
   return (
-    <div className="w-full md:w-2/6 h-screen dark:bg-black border-r border-gray-300 dark:border-gray-700 shadow-lg flex flex-col">
+    <div className="w-full md:w-2/6  dark:bg-black border-r border-gray-300 dark:border-gray-700 shadow-lg flex flex-col">
       
       <div className="p-4 flex justify-between items-center border-b border-gray-300 dark:border-gray-700">
         <div className="flex items-center space-x-2">

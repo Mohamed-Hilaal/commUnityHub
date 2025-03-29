@@ -29,7 +29,7 @@ const ChatBox = ({ current_user_id, recipient_id, recipient_name, chatId }) => {
   }
 
   return (
-<div className="w-2/4 p-5 bg-white border-l border-gray-200 dark:bg-black dark:border-gray-700 flex flex-col">
+<div className="w-full p-5 bg-white border-l border-gray-200 dark:bg-black dark:border-gray-700 flex flex-col">
       {/* Header */}
       <div className="p-4 flex items-center border-b border-gray-300 dark:border-gray-700">
         <div className="w-10 h-10 bg-gray-500 text-white rounded-full flex items-center justify-center font-semibold text-lg shadow-md">
@@ -86,7 +86,7 @@ const ChatBox = ({ current_user_id, recipient_id, recipient_name, chatId }) => {
             )}
           </div>
         </div>
-))}
+        ))}
 
     {/* Keeps the last message in view */}
         <div ref={messagesEndRef} />
