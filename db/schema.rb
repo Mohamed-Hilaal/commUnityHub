@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_16_064556) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_23_144230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_064556) do
     t.text "potential_challenges"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "creator_id", null: false
+    t.index ["creator_id"], name: "index_unities_on_creator_id"
   end
 
   create_table "unities_users", id: false, force: :cascade do |t|
@@ -68,6 +70,31 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_064556) do
     t.bigint "unity_id", null: false
     t.index ["unity_id"], name: "index_unities_users_on_unity_id"
     t.index ["user_id"], name: "index_unities_users_on_user_id"
+  end
+
+  create_table "unity_chat_memberships", force: :cascade do |t|
+    t.bigint "unity_chat_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unity_chat_id", "user_id"], name: "index_unity_chat_memberships_on_unity_chat_id_and_user_id", unique: true
+    t.index ["unity_chat_id"], name: "index_unity_chat_memberships_on_unity_chat_id"
+    t.index ["user_id"], name: "index_unity_chat_memberships_on_user_id"
+  end
+
+  create_table "unity_chats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "unity_posts", force: :cascade do |t|
+    t.text "content"
+    t.bigint "unity_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["unity_id"], name: "index_unity_posts_on_unity_id"
+    t.index ["user_id"], name: "index_unity_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,6 +113,11 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_16_064556) do
   end
 
   add_foreign_key "posts", "unities"
+  add_foreign_key "unities", "users", column: "creator_id", on_delete: :nullify
+  add_foreign_key "unity_chat_memberships", "unity_chats"
+  add_foreign_key "unity_chat_memberships", "users"
+  add_foreign_key "unity_posts", "unities"
+  add_foreign_key "unity_posts", "users"
   add_foreign_key "users", "accounts"
   add_foreign_key "users", "unities", column: "current_unity_id"
 end

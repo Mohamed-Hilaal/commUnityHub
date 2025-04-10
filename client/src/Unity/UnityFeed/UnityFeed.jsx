@@ -1,23 +1,25 @@
-import Post from './Post'
-import './Post.css'
+import UnityPost from './UnityPost'
+import './UnityPost.css'
 import { useEffect, useState } from 'react'
-import HttpClient from '../Http/HttpClient'
-import CreatePostModal from './CreatePostModal';
+import HttpClient from '../../Http/HttpClient'
+import CreateUnityPostModal from './CreateUnityPostModal';
 // import Image from '../Images/Luffy.jpg'
 
-const Feed = () => {
+const UnityFeed = ({unity_id, unity_name}) => {
 
-    const [posts, setPosts] = useState([])
+    const [unityPosts, setUnityPosts] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     
     const closeModal = () => {
         setIsModalOpen(false);
     };
 
-    const getposts = async () => {
-        const response = await HttpClient.getData('post/get_posts')
-        if (!response.posts) return 
-        setPosts(response.posts)
+    const getUnityPosts = async () => {
+        const response = await HttpClient.getData(`unityPost/get_unity_posts/${unity_id}`);
+
+        if (!response.unity_posts) return 
+        
+        setUnityPosts(response.unity_posts)
     }
 
     const handleCreatePost = () => {
@@ -25,11 +27,11 @@ const Feed = () => {
     }
 
     useEffect(()=>{
-        getposts()
+        getUnityPosts()
     }, [])
     
    return ( 
-    <div className="w-3/5 p-4 overflow-y-auto hide-scrollbar">
+    <div className="w-3/5 p-4 ml-10 overflow-y-auto hide-scrollbar">
         <div className="p-4">
             <div className='flex justify-between items-center mb-4'>
                 <h2 className="text-2xl font-bold mb-4 dark:text-white">Know What's going on?</h2>
@@ -41,10 +43,10 @@ const Feed = () => {
             </div>
             <div className="space-y-4">
             {
-                posts.map(
-                    (post) => {
+                unityPosts.map(
+                    (unityPost) => {
                         return (
-                            <Post post={post}/>
+                            <UnityPost unityPost={unityPost}/>
                         )
                     }
                 )
@@ -52,7 +54,7 @@ const Feed = () => {
             }
             </div>
         </div>
-        {isModalOpen && <CreatePostModal closeModal={closeModal} setPosts={setPosts}/> }
+        {isModalOpen && <CreateUnityPostModal closeModal={closeModal} setUnityPosts={setUnityPosts} unity_id={unity_id}/> }
     </div>
 
 
@@ -60,4 +62,4 @@ const Feed = () => {
 }
 
 
-export default Feed
+export default UnityFeed

@@ -1,25 +1,24 @@
 
 
-const Post = ({post}) => {
+const UnityPost = ({unityPost}) => {
+    console.log("Unity Post : ", unityPost)
     return (
         <>
              {/* <!-- Post --> */}
              <div className="bg-white dark:bg-black p-4 rounded-lg shadow">
                 <div className="flex items-center mb-4">
                     {/* <!-- User Image --> */}
-                    <div className="w-10 h-10 bg-gray-500 text-white rounded-full flex items-center justify-center font-semibold text-lg shadow-md">
-                        {post.posted_by.charAt(0).toUpperCase()}
-                    </div>
+                     <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo"/>
         
                     {/* <!-- User Name and Time --> */}
                     <div className="ml-3">
-                        <h3 className="text-lg font-semibold dark:text-white">{post.posted_by}</h3>
+                        <h3 className="text-lg font-semibold dark:text-white">{unityPost.posted_by}</h3>
                         <span className="text-sm text-gray-500 dark:text-gray-400">2 hours ago</span>
                     </div>
                 </div>
                 {/* <!-- Post Content --> */}
                 <p className="text-gray-600 dark:text-gray-300">
-                    {post.content}
+                    {unityPost.content}
                 </p>
                 {/* <!-- Post Image (Optional) --> */}
 
@@ -49,4 +48,4 @@ const Post = ({post}) => {
     )
 }
 
-export default Post
+export default UnityPost

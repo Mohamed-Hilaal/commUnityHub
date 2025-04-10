@@ -15,9 +15,22 @@ Rails.application.routes.draw do
 
   get '/unity/get_unities', to: 'unity#get_unities'
 
-  get '/post/get_unity_posts', to: 'post#get_unity_posts'
+  get '/unity/get_unity_members/:unity_id', to: 'unity#get_unity_members'
 
-  post '/post/create_unity_post', to: 'post#create_unity_post'
+  get '/post/get_posts', to: 'post#get_posts'
+
+  post '/post/create_post', to: 'post#create_post'
+
+  get '/unityPost/get_unity_posts/:unity_id', to: 'unity_post#get_unity_posts'
+
+  post '/unityPost/create', to: 'unity_post#create'
+
+  post '/unity/join', to: 'unity#join'
+
+  post '/unity_chat/create', to: 'unity_chat#create'
+
+  get '/unity_chat/get', to: 'unity_chat#get'
+
 
 
 end

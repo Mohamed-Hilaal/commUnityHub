@@ -14,7 +14,7 @@ const Dashboard = () => {
 
             <SideBar/>
 
-            <div className="flex flex-grow ml-64"> 
+            <div className="flex flex-grow ml-20"> 
                 <Feed/>
                 <Communities/>
             </div>

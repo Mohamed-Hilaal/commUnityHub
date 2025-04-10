@@ -1,7 +1,6 @@
 class UnityController < ApplicationController
 
     def create
-
       begin
         unity = Unity.new(
           community_name: params[:community_name],
@@ -12,9 +11,11 @@ class UnityController < ApplicationController
           goals: params[:goals],
           category: params[:category],
           audience: params[:audience],
-          long_term_objectives: params[:long_term_objectives]
-        )
-
+          long_term_objectives: params[:long_term_objectives],
+          )
+        
+        unity.creator = @current_user
+        
         if unity.save
           if @current_user.current_unity_id.nil?
             @current_user.current_unity = unity
@@ -45,6 +46,35 @@ class UnityController < ApplicationController
         render json: { status: "failure", error: e.message }, status: :unprocessable_entity
       rescue StandardError => e
         render json: { status: "failure", error: "An unexpected error occurred: #{e.message}" }, status: :internal_server_error
+      end
+    end
+
+    def join
+      
+      begin
+        unity = Unity.find(params[:unity_id])
+
+        if unity.users.include?(@current_user)
+          render json: { status: "failure", error: "You are already a member of this unity" }, status: :unprocessable_entity
+        else
+          unity.users << @current_user
+          render json: { status: "success", message: "You have successfully joined the unity" }, status: :ok
+        end
+      end
+    end
+
+    def get_unity_members
+      
+      begin
+        
+        unity = Unity.find(params[:unity_id])
+
+        render json: { status: "success", members: unity.users }, status: :ok
+
+      rescue ActiveRecord::RecordNotFound => e
+
+        render json: { status: "failure", error: "Unity not found" }, status: :not_found
+
       end
     end
     

@@ -7,13 +7,12 @@ class ProfileController < ApplicationController
           user = User.find_by(email: data[:email])
 
           if !user
-
-            account = Account.create(account_type: data[:account_type])  # Create an account
+            account = Account.create(account_type: data[:accountType])  # Create an account
 
             user = User.create(
               email: data[:email],
               username: data[:username],
-              full_name: data[:full_name],
+              full_name: data[:username],
               google_id: data[:email],
               account: account
             )

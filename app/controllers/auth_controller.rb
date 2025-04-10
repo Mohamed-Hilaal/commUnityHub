@@ -21,7 +21,7 @@ class AuthController < ApplicationController
       begin
         user = User.find_by(id: @current_user.id)
         if user
-          payload = {current_user_id:  user.id ,current_user_name: user.username, current_unity_name: user.current_unity.community_name, current_unity_id: user.current_unity_id}
+          payload = {current_user_email: user.email, current_user_id:  user.id ,current_user_name: user.username, current_unity_name: user.current_unity.community_name, current_unity_id: user.current_unity_id}
           render json: { status: 'success', payload: payload}, status: :ok
         else 
           render json: { status: 'failure', message: "Current user not found"}, status: :unauthorized
@@ -57,7 +57,7 @@ class AuthController < ApplicationController
           render json: { status: 'success', payload: {email: payload['email'], username: payload['name']}, userExists: false }, status: :ok
         else 
           session[:user_id] = user.id
-          payload = {current_user_id:  user.id ,current_user_name: user.username, current_unity_name: user.current_unity.community_name, current_unity_id: user.current_unity_id}
+          payload = {current_user_id:  user.id ,current_user_name: user.username, current_unity_name: user.current_unity && user.current_unity.community_name, current_unity_id: user.current_unity_id}
           render json: { status: 'success', payload: payload, userExists: true}, status: :ok
         end
 

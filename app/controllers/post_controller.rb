@@ -1,14 +1,14 @@
 class PostController < ApplicationController
-    def get_unity_posts
+    def get_posts
         begin 
             posts = Post.all
-            unity_posts = posts.map do |post|
+            updated_posts = posts.map do |post|
                 post.as_json.merge({
                     posted_by: post.unity.community_name
                 })
             end
             
-            render json: { status: 'success', unity_posts: unity_posts }, status: :ok
+            render json: { status: 'success', posts: updated_posts }, status: :ok
     
           rescue ActiveRecord::RecordInvalid => e
             render json: { status: "failure", error: e.message }, status: :unprocessable_entity
@@ -17,7 +17,7 @@ class PostController < ApplicationController
           end
     end
 
-    def create_unity_post
+    def create_post
       begin
         
         post = Post.new(
