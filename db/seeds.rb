@@ -73,17 +73,17 @@ require 'csv'
 # puts "Unities seeded!"
 
 
-# # Seed Posts
-# csv_file = Rails.root.join('db', './csv/Posts.csv')
-# CSV.foreach(csv_file, headers: true) do |row|
-#   Post.create!(title: row['title'], content: row['content'], unity_id: row['unity_id'])
-# end
-# puts "Posts seeded!"
+# Seed Posts
+csv_file = Rails.root.join('db', './csv/Posts.csv')
+CSV.foreach(csv_file, headers: true) do |row|
+  Post.create!(title: row['title'], content: row['content'], unity_id: row['unity_id'])
+end
+puts "Posts seeded!"
 
 # Seed Unity Posts
-csv_file = Rails.root.join('db', './csv/UnityPosts.csv')
-CSV.foreach(csv_file, headers: true) do |row|
-  UnityPost.create!(content: row['content'], unity_id: row['unity_id'], user_id: row['user_id'])
-end
-puts "Unity Posts seeded!"
+# csv_file = Rails.root.join('db', './csv/UnityPosts.csv')
+# CSV.foreach(csv_file, headers: true) do |row|
+#   UnityPost.create!(content: row['content'], unity_id: row['unity_id'], user_id: row['user_id'])
+# end
+# puts "Unity Posts seeded!"
 
