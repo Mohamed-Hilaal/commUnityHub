@@ -25,10 +25,11 @@ const Communities = () => {
     useEffect(()=>{
         getUnities()
     }, [isModalOpen])
-
+    
     return (
-        <div className="w-2/5 p-4 bg-white border-l border-gray-200 dark:bg-black dark:border-gray-700 ">
-            
+        
+<div className="w-2/6 p-4 h-[58vh] mt-10 mr-10 ml-10 bg-white rounded-2xl border border-gray-300 dark:bg-black dark:border-gray-700 ">
+    {/* Sticky Header */}
             <div className="community-header-container flex justify-between items-center mb-4">
 
                 <div className="community-header">
@@ -36,7 +37,7 @@ const Communities = () => {
                         <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
                         </svg>
-                        <h2 className="text-xl font-bold dark:text-white flex-1 ms-3 whitespace-nowrap">CommUnities</h2> 
+                        <h2 className="text-xl font-bold dark:text-white flex-1 ms-3 whitespace-nowrap">Suggested Unities</h2> 
                         {/* <span className="flex-1 ms-3 whitespace-nowrap">Users</span> */}
                     </a>            
                 </div>
@@ -48,21 +49,26 @@ const Communities = () => {
                     </svg>
                 </button>
             </div>
-            
-            <ul className="max-w divide-y divide-gray-200 dark:divide-gray-700">
-                {
-                    unities.map( (unity) => {
-                        return (<li className="py-3 sm:py-4">
-                            <Unity unityDetails={unity}/>
-                        </li>)
-                    })
-                }
-            </ul>
 
+    <ul className="divide-y divide-gray-200 dark:divide-gray-700 p-2">
+        {unities.slice(0, 6).map((unity, index) => (
+            <li key={index} className="py-3 sm:py-4">
+                <Unity unityDetails={unity}/>
+            </li>
+        ))}
+    </ul>
 
-            {isModalOpen && <CreateUnityModal closeModal={closeModal}/> }
-
+    {unities.length > 6 && (
+        <div className="text-left p-3">
+            <button  className="text-blue-500 hover:underline">See More</button>
         </div>
+    )}
+
+    {/* Modal */}
+    {isModalOpen && <CreateUnityModal closeModal={closeModal} />}
+</div>
+
+
     )
 }
 
