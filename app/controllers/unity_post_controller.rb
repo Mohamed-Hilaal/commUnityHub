@@ -19,7 +19,11 @@ class UnityPostController < ApplicationController
       unity = Unity.find(unity_id)
 
       if unity
-        unity_posts = unity.unity_posts
+        unity_posts = unity.unity_posts.map do |post|
+          post.as_json.merge({
+              posted_by: post.user.username
+          })
+        end
         render json: { status: "success", unity_posts: unity_posts }, status: :ok
       else
         render json: { error: "Unity not found" }, status: :not_found
