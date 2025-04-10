@@ -71,6 +71,8 @@ const ChatBox = ({ current_user_id, recipient_id, recipient_name, chatId }) => {
               </span>
             </div>
 
+
+
             <div
               className={`flex flex-col leading-1.5 p-3 shadow-md ${
                 (msg.senderId)
@@ -86,7 +88,7 @@ const ChatBox = ({ current_user_id, recipient_id, recipient_name, chatId }) => {
             )}
           </div>
         </div>
-        ))}
+      ))}
 
     {/* Keeps the last message in view */}
         <div ref={messagesEndRef} />
@@ -99,7 +101,7 @@ const ChatBox = ({ current_user_id, recipient_id, recipient_name, chatId }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          className="flex-1 p-2 rounded-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 p-3 rounded-full border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Type a message..."
         />
         <button

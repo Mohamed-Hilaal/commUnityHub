@@ -37,7 +37,7 @@ const UnityBoard = () => {
             <Navbar/> 
             <SideBar/>
 
-            <div className="flex flex-grow ml-64"> 
+            <div className="flex flex-grow ml-20"> 
                 <Inbox unity_id={unity_id} unity_name={unity_name} handleChatNavigation={handleChatNavigation}/>
                 {showChatBox ? (
                     <ChatBox recipient_id={memberId} recipient_name={memberName} chatId={chatId} current_user_id={user_id}/>

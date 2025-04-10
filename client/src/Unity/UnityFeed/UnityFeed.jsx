@@ -31,7 +31,7 @@ const UnityFeed = ({unity_id, unity_name}) => {
     }, [])
     
    return ( 
-    <div className="w-3/5 p-4 overflow-y-auto hide-scrollbar">
+    <div className="w-3/5 p-4 ml-10 overflow-y-auto hide-scrollbar">
         <div className="p-4">
             <div className='flex justify-between items-center mb-4'>
                 <h2 className="text-2xl font-bold mb-4 dark:text-white">Know What's going on?</h2>
