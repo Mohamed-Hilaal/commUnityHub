@@ -16,7 +16,7 @@ const Login = () => {
 
     try{
       
-      const data = await HttpClient.getData('auth/getClientID')
+      const data = await HttpClient.getData('auth/client_id')
       setClientID(data.clientID)
 
     }catch(error){

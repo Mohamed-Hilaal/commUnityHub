@@ -7,7 +7,7 @@ class HttpClient {
 
     
     this.axiosInstance = axios.create({
-      baseURL: 'http://localhost:3000/',
+      baseURL: 'http://localhost:8080/api',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -19,6 +19,8 @@ class HttpClient {
   async getData(url, params = {}) {
     try {
       const response = await this.axiosInstance.get(url, { params }, { withCredentials: true });
+      console.log("Response : ", response)
+
       return response.data
     } catch (error) {
       console.error('Error appeared while trying to fetch data:', error);
