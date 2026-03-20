@@ -1,6 +1,9 @@
 package auth
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+)
 
 type router struct {
 	handler *Handler
@@ -8,17 +11,17 @@ type router struct {
 }
 
 
-func NewRouter(clientID string, rg *gin.RouterGroup) *router {
+func NewRouter(clientID string, rg *gin.RouterGroup, db *gorm.DB) *router {
 	
 	authRg := rg.Group("/auth")
 
 	return &router{
-		handler: NewHandler(clientID),
+		handler: NewHandler(db),
 		rg:      authRg,
 	}
 
 }
-func (r *router) RegisterRoutes(rg *gin.RouterGroup) {
-	r.rg.GET("/client_id", r.handler.clientID)
+func (r *router) RegisterRoutes() {
+	r.rg.POST("/google_oauth2", r.handler.GoogleAuth)
 }
 
