@@ -39,6 +39,8 @@
 /.env.*
 /server/.env
 /server/.env.*
+/client/.env.
+/client/.env.*
 
 # Ignore node_modules (if using Webpacker or Node)
 /node_modules
