@@ -7,27 +7,9 @@ import { UserContext } from '../UserContext';
 
 const Login = () => {
 
-  const [clientID, setClientID] = React.useState('')
   const { setCurrentUserDetails } = useContext(UserContext);
   
   const navigate = useNavigate();
-
-  const getClientId = async () =>{
-
-    try{
-      
-      const data = await HttpClient.getData('auth/client_id')
-      setClientID(data.clientID)
-
-    }catch(error){
-      console.error('Error fetching clientID :', error);
-    }
-
-  }
-
-  React.useEffect(() => {
-    getClientId()
-  }, [])
 
   const handleLoginSuccess = async (credentialResponse) => {
     
@@ -73,7 +55,7 @@ const Login = () => {
 
         <div className="google-signin-container">
 
-            <GoogleOAuth clientID={clientID} handleLoginSuccess={handleLoginSuccess}/>
+            <GoogleOAuth handleLoginSuccess={handleLoginSuccess}/>
         </div>
       </div>
     </div>
