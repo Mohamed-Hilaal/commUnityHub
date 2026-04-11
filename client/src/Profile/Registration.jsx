@@ -29,7 +29,7 @@ const Registration = () => {
         e.preventDefault();
         
         try{
-            const res = await HttpClient.updateData('profile/register', formData)
+            const res = await HttpClient.postData('user/register', formData)
 
             if  (!res || res.status !== 'success'){
                 throw 'something went wrong'
