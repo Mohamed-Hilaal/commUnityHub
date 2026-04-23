@@ -19,7 +19,6 @@ func NewHandler(db *gorm.DB) *handler {
 
 func (h *handler) Register(c *gin.Context) {
 
-// "username":"Hilaal Mohamed","email":"hilaalmohamed2@gmail.com","contactNumber":"9092563985","accountType":"Basic","terms":true}
 	type body struct {
 		Name string `json:"username" binding:"required"`
 		Email string `json:"email" binding:"required"`

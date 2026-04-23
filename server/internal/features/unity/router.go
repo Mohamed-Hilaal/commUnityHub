@@ -22,4 +22,5 @@ func NewRouter(clientID string, rg *gin.RouterGroup, db *gorm.DB) *router {
 
 func (r *router) RegisterRoutes() {
 	r.rg.GET("/get_all_unities", r.handler.getAllUnities)
+	r.rg.POST("/create", r.handler.createUnity)
 }

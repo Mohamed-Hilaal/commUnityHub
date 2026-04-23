@@ -5,16 +5,17 @@ import HttpClient from '../Http/HttpClient'
 const StepperCreateCommunityForm = ({ onSubmit, onCancel }) => {
   const [currentStep, setCurrentStep] = useState(1);
 
+
   const [formData, setFormData] = useState({
-    community_name: '',
-    contact_method: '',
-    commitment_level: '',
-    community_vision: '',
-    community_description: '',
+    communityName: '',
+    contactMethod: '',
+    commitmentLevel: '',
+    communityVision: '',
+    description: '',
     goals: '',
     category: '',
     audience: '',
-    long_term_objectives: ''
+    longTermObjectives: ''
   });;
 
   const commUnityCreation = async () => {
@@ -66,16 +67,16 @@ const StepperCreateCommunityForm = ({ onSubmit, onCancel }) => {
   const isStepComplete = () => {
     switch(currentStep) {
       case 1:
-        return formData.community_name.trim() !== '';
+        return formData.communityName.trim() !== '';
       case 2:
         return formData.category.trim() !== '' && formData.audience.trim() !== '';
       case 3:
-        return formData.contact_method.trim() !== '' && formData.commitment_level.trim() !== ''
+        return formData.contactMethod.trim() !== '' && formData.commitmentLevel.trim() !== ''
       case 4:
-        return formData.community_vision.trim() !== '' && formData.long_term_objectives.trim() !== ''
+        return formData.communityVision.trim() !== '' && formData.longTermObjectives.trim() !== ''
          && formData.goals.trim() !== ''
       case 5:
-        return formData.community_description.trim() !== '';
+        return formData.description.trim() !== '';
       default:
         return true;
     }
@@ -89,12 +90,12 @@ const StepperCreateCommunityForm = ({ onSubmit, onCancel }) => {
           <div className="space-y-4">
           <div className="space-y-4">
             <div>
-              <label htmlFor="community_name" className="block text-lg font-medium text-gray-700 dark:text-gray-300">What's your community name?</label>
+              <label htmlFor="communityName" className="block text-lg font-medium text-gray-700 dark:text-gray-300">What's your community name?</label>
               <input
                 type="text"
-                id="community_name"
-                name="community_name"
-                value={formData.community_name}
+                id="communityName"
+                name="communityName"
+                value={formData.communityName}
                 onChange={handleChange}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                 required
@@ -145,24 +146,24 @@ const StepperCreateCommunityForm = ({ onSubmit, onCancel }) => {
             <div className="space-y-4">
 
             <div>
-              <label htmlFor="contact_method" className="block text-lg font-medium text-gray-700 dark:text-gray-300">What's the best way to contact your community?</label>
+              <label htmlFor="contactMethod" className="block text-lg font-medium text-gray-700 dark:text-gray-300">What's the best way to contact your community?</label>
               <input
                 type="text"
-                id="contact_method"
-                name="contact_method"
-                value={formData.contact_method}
+                id="contactMethod"
+                name="contactMethod"
+                value={formData.contactMethod}
                 onChange={handleChange}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                 required
               />
             </div>
             <div>
-              <label htmlFor="commitment_level" className="block text-lg font-medium text-gray-700 dark:text-gray-300">How much time and effort are you willing to invest in managing and growing this community?</label>
+              <label htmlFor="commitmentLevel" className="block text-lg font-medium text-gray-700 dark:text-gray-300">How much time and effort are you willing to invest in managing and growing this community?</label>
               <input
                 type="text"
-                id="commitment_level"
-                name="commitment_level"
-                value={formData.commitment_level}
+                id="commitmentLevel"
+                name="commitmentLevel"
+                value={formData.commitmentLevel}
                 onChange={handleChange}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                 required
@@ -176,12 +177,12 @@ const StepperCreateCommunityForm = ({ onSubmit, onCancel }) => {
             <div className="space-y-4">
 
             <div>
-              <label htmlFor="community_vision" className="block text-lg font-medium text-gray-700 dark:text-gray-300">What is your community aiming for, and what do you envision it achieving in the long run?</label>
+              <label htmlFor="communityVision" className="block text-lg font-medium text-gray-700 dark:text-gray-300">What is your community aiming for, and what do you envision it achieving in the long run?</label>
               <input
                 type="text"
-                id="community_vision"
-                name="community_vision"
-                value={formData.community_vision}
+                id="communityVision"
+                name="communityVision"
+                value={formData.communityVision}
                 onChange={handleChange}
                 className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                 required
@@ -189,11 +190,11 @@ const StepperCreateCommunityForm = ({ onSubmit, onCancel }) => {
             </div>
 
               <div>
-                <label htmlFor="long_term_objectives" className="block text-lg font-medium text-gray-700 dark:text-gray-300">What are the long-term objectives of your community?</label>
+                <label htmlFor="longTermObjectives" className="block text-lg font-medium text-gray-700 dark:text-gray-300">What are the long-term objectives of your community?</label>
                 <textarea
-                  id="long_term_objectives"
-                  name="long_term_objectives"
-                  value={formData.long_term_objectives}
+                  id="longTermObjectives"
+                  name="longTermObjectives"
+                  value={formData.longTermObjectives}
                   onChange={handleChange}
                   rows="4"
                   className="mt-1 block w-full text-lg p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -221,11 +222,11 @@ const StepperCreateCommunityForm = ({ onSubmit, onCancel }) => {
           <div className="space-y-4">
 
             <div>
-              <label htmlFor="community_description" className="block text-lg font-medium text-gray-700 dark:text-gray-300">Describe your community and its purpose:</label>
+              <label htmlFor="description" className="block text-lg font-medium text-gray-700 dark:text-gray-300">Describe your community and its purpose:</label>
               <textarea
-                id="community_description"
-                name="community_description"
-                value={formData.community_description}
+                id="description"
+                name="description"
+                value={formData.description}
                 onChange={handleChange}
                 rows="4"
                 className="mt-1 block w-full text-lg p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"

@@ -16,14 +16,16 @@ func NewService(db *gorm.DB) *Service {
 }
 
 
-func (s *Service) CreateUnity(CommunityName, Category, Audience, description, ContactMethod, CommunityVision, Goals, LongTermObjectives, CommitmentLevel string, CreatorID uuid.UUID) (*models.Unity, error) {
+
+
+func (s *Service) CreateUnity(communityName, category, audience, description, contactMethod, CommunityVision, Goals, LongTermObjectives, CommitmentLevel string, CreatorID uuid.UUID) (*models.Unity, error) {
 
 	unity := models.Unity{
-		CommunityName: CommunityName,
-		Category: Category,
-		Audience: Audience,
+		CommunityName: communityName,
+		Category: category,
+		Audience: audience,
 		CommunityDescription: description,
-		ContactMethod: ContactMethod,
+		ContactMethod: contactMethod,
 		CommunityVision: CommunityVision,
 		Goals: Goals,
 		LongTermObjectives: LongTermObjectives,

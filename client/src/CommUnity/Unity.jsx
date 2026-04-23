@@ -9,16 +9,17 @@ const Unity = ({unityDetails}) => {
             console.log("Joined Unity")
         }
     }
+    {console.log(unityDetails)}
 
     return (
 
         <div className="flex items-center space-x-4 rtl:space-x-reverse">
             <div className="w-10 h-10 bg-gray-500 text-white rounded-full flex items-center justify-center font-semibold text-lg shadow-md">
-                {unityDetails.community_name.charAt(0).toUpperCase()}
+                {unityDetails.communityName.charAt(0).toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                {unityDetails.community_name}
+                {unityDetails.communityName}
                 </p>
                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                 {unityDetails.category}
