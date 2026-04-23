@@ -3,6 +3,7 @@ package auth
 import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"github.com/Mohamed-Hilaal/commUnityHub/internal/session"
 )
 
 type router struct {
@@ -11,12 +12,12 @@ type router struct {
 }
 
 
-func NewRouter(clientID string, rg *gin.RouterGroup, db *gorm.DB) *router {
+func NewRouter(clientID string, rg *gin.RouterGroup, db *gorm.DB, sessionManager session.Manager) *router {
 	
 	authRg := rg.Group("/auth")
 
 	return &router{
-		handler: NewHandler(db),
+		handler: NewHandler(db, sessionManager),
 		rg:      authRg,
 	}
 

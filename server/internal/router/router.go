@@ -6,16 +6,19 @@ import (
     "github.com/Mohamed-Hilaal/commUnityHub/internal/features/user"
     "github.com/Mohamed-Hilaal/commUnityHub/internal/features/post"
     "github.com/Mohamed-Hilaal/commUnityHub/internal/middleware"
+    "github.com/Mohamed-Hilaal/commUnityHub/internal/session"
     "gorm.io/gorm"
 )
 
-func SetupRouter(clientID string, db *gorm.DB) *gin.Engine {
+func SetupRouter(clientID string, db *gorm.DB, sessionManager session.Manager, middleware *middleware.Middleware) *gin.Engine {
+
 
     r := gin.Default()
     r.Use(middleware.CorsMiddleware())
-
     api := r.Group("/api")
-    authRouter := auth.NewRouter(clientID, api, db)
+    authRouter := auth.NewRouter(clientID, api, db, sessionManager)
+
+    r.Use(middleware.AuthMiddleware())
 	authRouter.RegisterRoutes()
     userRouter := user.NewRouter(clientID, api, db)
     userRouter.RegisterRoutes()

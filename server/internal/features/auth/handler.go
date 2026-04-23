@@ -6,16 +6,19 @@ import (
     "os"
 	"log"
     "github.com/gin-gonic/gin"
+    "github.com/google/uuid"
     "google.golang.org/api/idtoken"
+    "github.com/Mohamed-Hilaal/commUnityHub/internal/session"
     "gorm.io/gorm"
 )
 
 type Handler struct {
     service *Service
+    sessionManager session.Manager
 }
 
-func NewHandler(db *gorm.DB) *Handler {
-    return &Handler{service: NewService(db)}
+func NewHandler(db *gorm.DB, sessionManager session.Manager) *Handler {
+    return &Handler{service: NewService(db), sessionManager: sessionManager}
 }
 
 func (h *Handler) GoogleAuth(c *gin.Context) {
@@ -77,6 +80,8 @@ func (h *Handler) GoogleAuth(c *gin.Context) {
             "username": name,
         }
 
+        c.SetCookie("session_id", "", -1, "/", "localhost", false, true)
+
         c.JSON(http.StatusOK, gin.H{
             "status":     "success",
             "payload":    responsePayload,
@@ -99,6 +104,15 @@ func (h *Handler) GoogleAuth(c *gin.Context) {
     }
 
     log.Println("Auth::Handler::GoogleAuth - Success")
+
+    sessionID := uuid.New().String()
+
+    // store session
+    h.sessionManager.CreateSession(sessionID, user.ID)
+
+    // set cookie
+    c.SetCookie("session_id", sessionID, 3600, "/", "localhost", false, true)
+
 
     c.JSON(http.StatusOK, gin.H{
         "status":     "success",
