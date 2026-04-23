@@ -48,7 +48,16 @@ func (m *Middleware) AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
+
 		c.Set("userID", userID)
+		log.Printf("Authenticated user ID: %v", userID)
+		id, exists := c.Get("userID")
+		if exists {
+			log.Printf("User ID in context: %v", id)
+		} else {
+			log.Printf("No user ID found in context")
+		}
+
 		c.Next()
 	}
 }

@@ -24,6 +24,6 @@ func NewRouter(clientID string, rg *gin.RouterGroup, db *gorm.DB) *router {
 
 
 func (r *router) RegisterRoutes() {
-	r.rg.POST("/get_public_posts", r.handler.getPublicPost)
+	r.rg.GET("/get_public_posts", r.handler.getPublicPost)
 }
 

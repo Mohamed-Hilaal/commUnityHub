@@ -4,7 +4,7 @@ import (
 	    "github.com/google/uuid"
 )
 
-# Todo: Implement a more robust session management system, possibly using Redis or another in-memory store for better performance and scalability.
+// Todo: Implement a more robust session management system, possibly using Redis or another in-memory store for better performance and scalability.
 type session struct {
 	SessionStore map[string]uuid.UUID
 }

@@ -27,6 +27,16 @@ func FindUserByEmail(db *gorm.DB, email string) (*models.User, error) {
 	return &user, nil
 }
 
+func FindUserByID(db *gorm.DB, id uuid.UUID) (*models.User, error) {
+	var user models.User
+	result := db.Where("id = ?", id).First(&user)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &user, nil
+}
+
 
 func (s *Service) CreateUser(name, email string, account *models.Account) (*models.User, error) {
 

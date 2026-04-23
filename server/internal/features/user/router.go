@@ -25,5 +25,6 @@ func NewRouter(clientID string, rg *gin.RouterGroup, db *gorm.DB) *router {
 
 func (r *router) RegisterRoutes() {
 	r.rg.POST("/register", r.handler.Register)
+	r.rg.GET("/get_current_user_info", r.handler.GetCurrentUserInfo)
 }
 

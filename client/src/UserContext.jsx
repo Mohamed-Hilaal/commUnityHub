@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const response = await HttpClient.getData("/auth/get_current_user_details")
+                const response = await HttpClient.getData("/user/get_current_user_info")
                 if (response.payload && response.payload.current_user_id) {
                     setCurrentUserDetails(response.payload);
                 }

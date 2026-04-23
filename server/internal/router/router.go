@@ -17,12 +17,17 @@ func SetupRouter(clientID string, db *gorm.DB, sessionManager session.Manager, m
     r.Use(middleware.CorsMiddleware())
     api := r.Group("/api")
     authRouter := auth.NewRouter(clientID, api, db, sessionManager)
+    authRouter.RegisterRoutes()
 
-    r.Use(middleware.AuthMiddleware())
-	authRouter.RegisterRoutes()
-    userRouter := user.NewRouter(clientID, api, db)
+    // Protected routes
+    protected := api.Group("/")
+    protected.Use(middleware.AuthMiddleware())
+
+    userRouter := user.NewRouter(clientID, protected, db)
     userRouter.RegisterRoutes()
-    postRouter := post.NewRouter(clientID, api, db)
+
+    postRouter := post.NewRouter(clientID, protected, db)
     postRouter.RegisterRoutes()
+
     return r
 }
