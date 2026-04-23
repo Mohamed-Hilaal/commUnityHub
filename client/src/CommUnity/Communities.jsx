@@ -18,7 +18,7 @@ const Communities = () => {
     const [unities, setUnities] = useState([])
 
     const getUnities = async () => {
-        const response = await HttpClient.getData('unity/get_unities')
+        const response = await HttpClient.getData('unity/get_all_unities')
         setUnities(response.unities)
     }
 

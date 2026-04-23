@@ -5,6 +5,8 @@ import (
     "github.com/Mohamed-Hilaal/commUnityHub/internal/features/auth"
     "github.com/Mohamed-Hilaal/commUnityHub/internal/features/user"
     "github.com/Mohamed-Hilaal/commUnityHub/internal/features/post"
+    "github.com/Mohamed-Hilaal/commUnityHub/internal/features/unity"
+
     "github.com/Mohamed-Hilaal/commUnityHub/internal/middleware"
     "github.com/Mohamed-Hilaal/commUnityHub/internal/session"
     "gorm.io/gorm"
@@ -28,6 +30,9 @@ func SetupRouter(clientID string, db *gorm.DB, sessionManager session.Manager, m
 
     postRouter := post.NewRouter(clientID, protected, db)
     postRouter.RegisterRoutes()
+
+    unityRouter := unity.NewRouter(clientID, protected, db)
+    unityRouter.RegisterRoutes()
 
     return r
 }
