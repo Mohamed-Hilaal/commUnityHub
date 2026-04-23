@@ -15,7 +15,7 @@ const Feed = () => {
     };
 
     const getposts = async () => {
-        const response = await HttpClient.getData('post/get_posts')
+        const response = await HttpClient.getData('post/get_public_posts')
         if (!response.posts) return 
         setPosts(response.posts)
     }
