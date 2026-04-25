@@ -61,3 +61,28 @@ func (s *Service) GetUnityByID(id uint) (*models.Unity, error) {
 
 	return &unity, nil
 }
+
+
+func (s *Service) GetCurrentUsersCurrentUnityID(userID uuid.UUID) (*uuid.UUID, error) {
+	var user models.User
+
+	result := s.db.Where("id = ?", userID).First(&user)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return user.CurrentUnityID, nil
+}
+
+func (s *Service) UpdateCurrentUsersCurrentUnityID(userID uuid.UUID, unityID *uuid.UUID) error {
+	var user models.User
+
+	result := s.db.Where("id = ?", userID).First(&user)
+	if result.Error != nil {
+		return result.Error
+	}
+
+	user.CurrentUnityID = unityID
+
+	return s.db.Save(&user).Error
+}

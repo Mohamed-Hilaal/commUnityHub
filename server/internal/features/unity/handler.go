@@ -67,6 +67,32 @@ func (h *handler) createUnity(c *gin.Context) {
 		return
 	}
 
+	currentUnityID, err := h.service.GetCurrentUsersCurrentUnityID(creatorID.(uuid.UUID))
+	if err != nil {
+		log.Println("Unity::Handler::createUnity - Something went wrong while fetching user's current unity ID.., Err: ", err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"status":  "error",
+			"message": "Failed to fetch user's current unity ID",
+		})
+		return
+	}
+
+	if currentUnityID == nil {
+		log.Println("Unity::Handler::createUnity - User does not have a current unity ID")
+		err = h.service.UpdateCurrentUsersCurrentUnityID(creatorID.(uuid.UUID), &unity.ID)
+
+		if err != nil {
+			log.Println("Unity::Handler::createUnity - Something went wrong while updating user's current unity ID.., Err: ", err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"status":  "error",
+				"message": "Failed to update user's current unity ID",
+			})
+			return
+		}
+	}
+
+
+
 	c.JSON(http.StatusOK, gin.H{
 		"status": "success",
 		"unity": unity,

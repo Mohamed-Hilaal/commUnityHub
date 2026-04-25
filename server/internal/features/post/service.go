@@ -3,6 +3,8 @@ package post
 import (
     "github.com/Mohamed-Hilaal/commUnityHub/internal/models"
 	"gorm.io/gorm"
+	"github.com/google/uuid"
+	"log"
 )
 
 
@@ -28,12 +30,30 @@ func (s *Service) FetchPublicPosts() ([]models.Post, error) {
 }
 
 
-func (s *Service) CreatePublicPost(post models.Post) error {
-	post.Visibility = "public"
+func (s *Service) CreatePublicPost(title, content string, currentUnityID *uuid.UUID, userID uuid.UUID) error {
 
-	if err := s.db.Create(&post).Error; err != nil {
-		return err
+	post := models.Post{
+		Title:      title,
+		Content:    content,
+		Visibility: "public",
+		UserID: userID,
 	}
 
-	return nil
+	if currentUnityID != nil {
+		post.UnityID = *currentUnityID
+	}
+
+	return s.db.Create(&post).Error
+}
+
+func (s *Service) GetCurrentUsersCurrentUnityID(userID uuid.UUID) (*uuid.UUID, error) {
+	var user models.User
+
+	result := s.db.Where("id = ?", userID).First(&user)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	log.Printf("Post::Service::GetCurrentUsersCurrentUnityID - User's current unity ID: %v", user.CurrentUnityID)
+	return user.CurrentUnityID, nil
 }

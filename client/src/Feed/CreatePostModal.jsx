@@ -21,8 +21,8 @@ const CreatePostModal = ({closeModal, setPosts}) => {
 
         if (content === "") return
 
-        const res = await HttpClient.postData('post/create_post', 
-          {content: content, title: ""}
+        const res = await HttpClient.postData('post/create', 
+          {content: content, title: "public post"}
         )
         
         if (res.status !== "success") return

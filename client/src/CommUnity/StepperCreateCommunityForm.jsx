@@ -5,7 +5,6 @@ import HttpClient from '../Http/HttpClient'
 const StepperCreateCommunityForm = ({ onSubmit, onCancel }) => {
   const [currentStep, setCurrentStep] = useState(1);
 
-
   const [formData, setFormData] = useState({
     communityName: '',
     contactMethod: '',
